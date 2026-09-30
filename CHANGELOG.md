@@ -1,5 +1,14 @@
 # Changelog
 
+## [unreleased] -2026.10.01
+
+* Change application name to yd-cfe
+* Update ffmpeg to 9.0.2
+* Refactor get video title method
+* Fix Simplified Chinese problem
+* Fix typo
+* Fix NSIS uninstall path bug
+
 ## [1.0.11] -2026.08.20
 
 * Update yt-dlp to 2026.08.19

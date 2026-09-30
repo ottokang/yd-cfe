@@ -1,8 +1,5 @@
 rem Input YouTube URL
 
-rem Set info file location
-set "info_file=%TEMP%\yt-dlp-cfe_info_%RANDOM%.json"
-
 rem If in development mode, set a URL for testing
 if %is_dev%==true (
     set "input_url="
@@ -20,43 +17,39 @@ echo %reset_color%
 
 :CHECK_INPUT_URL
 rem Check if input is empty
-if "%input_url%"=="" (
+if "!input_url!"=="" (
     echo:
     echo %yellow%%LANG_did_not_input_url% %reset_color%
     pause
     goto INPUT_URL_END
 )
 
-rem Clean URL (symols like &, ?...)
-for /f "delims=" %%a in ('powershell -command "[System.Net.WebUtility]::HtmlEncode('%input_url%').Split('&')[0]"') do (
+rem Clean URL (symbols like &, ?...)
+for /f "delims=&" %%a in ("!input_url!") do (
     set "input_url=%%a"
 )
-
-for /f "delims=" %%a in ('powershell -command "'%input_url%' -replace '\?feature=shared'"') do (
-    set "input_url=%%a"
-)
+set "input_url=!input_url:?feature=shared=!"
 
 rem Validate URL
-echo %LANG_clean_url%: %yellow%"%input_url%"%reset_color%
+echo %LANG_clean_url%: %yellow%"!input_url!"%reset_color%
 echo:
 echo %blue%%LANG_checking_url%%reset_color%
 echo:
 
-rem Get video json information
-%_YT_DLP_BIN_% %_FFMPEG_LOCATION_% %cookies_option% --dump-single-json --simulate --flat-playlist "%input_url%" > %info_file%
-if %errorlevel%==0 (
-    for /f "tokens=*" %%a in ('powershell -command "(Get-Content %info_file% -Encoding UTF8 | ConvertFrom-Json).title"') do set "title=%%a"
+rem Get video or playlist title
+set "valid_title="
+for /f "delims=" %%a in ('%_YT_DLP_BIN_% %_FFMPEG_LOCATION_% %cookies_option% --encoding utf-8 --no-warnings --flat-playlist --playlist-items 1 --print "%%(playlist_title,title)s" "!input_url!"') do (
+    set "valid_title=%%a"
+)
+
+if defined valid_title (
+    set "title=!valid_title!"
+    set "url=!input_url!"
 ) else (
     echo:
     echo %red%%LANG_invalid_url%%reset_color%
     pause
-    goto INPUT_URL_END
 )
-
-rem Delete temp file, set URL
-del %info_file%
-set "url=%input_url%"
-goto INPUT_URL_END
 
 :INPUT_URL_END
 exit /b 0
