@@ -5,7 +5,7 @@ chcp 65001 > nul
 setlocal enabledelayedexpansion
 
 rem Set const
-set "_VERSION_=1.0.11"
+set "_VERSION_=1.0.12"
 set "_BIN_PATH_=.\bin"
 set "_YT_DLP_BIN_=%_BIN_PATH_%\yt-dlp.exe"
 set "_FFMPEG_LOCATION_=--ffmpeg-location %_BIN_PATH_%"
@@ -61,7 +61,7 @@ if "%title%"=="" (
 rem Start menu display
 cls
 echo:
-echo     %cyan%^<^< yt-dlp-cfe ^>^>%reset_color%    v%_VERSION_%                      %yellow_strong% C %reset_color% Cookies: %green%%cookies_from_browser%%reset_color%
+echo     %cyan%^<^< yd-cfe ^>^>%reset_color%    v%_VERSION_%                      %yellow_strong% C %reset_color% Cookies: %green%%cookies_from_browser%%reset_color%
 
 if "%is_deno_installed%"=="true" (
     echo:

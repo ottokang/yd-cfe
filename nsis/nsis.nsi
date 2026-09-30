@@ -4,12 +4,12 @@
 ; !define TEST_MODE
 
 ; Basic definitions
-!define APP_NAME "yt-dlp-cfe"
-!define APP_EXE  "yt-dlp-cfe.cmd"
-!define APP_VERSION "1.0.11"
-!define APP_PUBLISHER "yt-dlp-cfe Developers"
+!define APP_NAME "yd-cfe"
+!define APP_EXE  "yd-cfe.cmd"
+!define APP_VERSION "1.0.12"
+!define APP_PUBLISHER "yd-cfe Developers"
 !define APP_UNINSTKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
-!define APP_ICON "yt-dlp-cfe_icon.ico"
+!define APP_ICON "yd-cfe_icon.ico"
 !define UNINST_ICON "uninstall_icon.ico"
 Unicode true
 
