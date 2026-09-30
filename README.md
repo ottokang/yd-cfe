@@ -19,10 +19,6 @@ irm https://deno.land/install.ps1 | iex
 
 圖示由 Freepik 提供（[Flaticon](https://www.flaticon.com/free-icons/video)）
 
-## 程式截圖
-
-![screenshot_zh-TW](./media/screenshot_zh-TW.png)
-
 ---
 
 ## English
@@ -45,4 +41,4 @@ Icon created by Freepik - [Flaticon](https://www.flaticon.com/free-icons/video)
 
 ## Screenshot
 
-![screenshot_en-US](./media/screenshot_en-US.png)
+![screenshot](./media/screenshot.png)
