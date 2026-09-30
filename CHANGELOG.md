@@ -4,6 +4,7 @@
 
 * Change application name to yd-cfe
 * Update ffmpeg to 9.0.2
+* Compress ffmpeg binary with UPX
 * Refactor get video title method
 * Fix Simplified Chinese problem
 * Fix typo
