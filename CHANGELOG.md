@@ -1,6 +1,11 @@
 # Changelog
 
-## [unreleased] -2026.10.01
+## [1.0.13]
+
+* Add clipboard link detection
+* Add command window title
+
+## [1.0.12] -2026.10.01
 
 * Change application name to yd-cfe
 * Update ffmpeg to 9.0.2

@@ -10,10 +10,35 @@ rem Input URL prompt
 cls
 echo:
 echo:
-echo %cyan%%LANG_input_url_prompt% %reset_color% %green%
+
+rem Check clipboard for URL
+set "clip_url="
+for /f "delims=" %%a in ('powershell -noprofile -command "Get-Clipboard" 2^>nul') do (
+    if not defined clip_url set "clip_url=%%a"
+)
+
+rem If clipboard has URL, suggest it
+if defined clip_url if "!clip_url:~0,4!"=="http" goto CLIPBOARD_PROMPT
+
+echo %cyan%%LANG_input_url_prompt% %reset_color%
+goto PROMPT_INPUT
+
+:CLIPBOARD_PROMPT
+echo %cyan%%LANG_clipboard_detected%:%reset_color% %yellow%!clip_url!%reset_color%
+echo:
+echo %green%%LANG_press_enter_to_use_clipboard%%reset_color%
+
+:PROMPT_INPUT
 set "input_url="
 set /p input_url="> "
 echo %reset_color%
+
+rem If user pressed Enter and clipboard URL exists, use clipboard URL
+if "!input_url!"=="" (
+    if defined clip_url if "!clip_url:~0,4!"=="http" (
+        set "input_url=!clip_url!"
+    )
+)
 
 :CHECK_INPUT_URL
 rem Check if input is empty

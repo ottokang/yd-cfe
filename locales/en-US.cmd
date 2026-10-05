@@ -3,6 +3,8 @@ rem en-US locale
 set "LANG_locale_name=English (US)"
 set "LANG_dev_mode=Development Mode"
 set "LANG_input_url_prompt=Please paste YouTube URL (Right click or Ctrl + V):"
+set "LANG_clipboard_detected=Detected URL in clipboard"
+set "LANG_press_enter_to_use_clipboard=Press Enter to use this URL, or input another URL:"
 set "LANG_did_not_input_url=Did not input URL"
 set "LANG_clean_url=Cleaned URL"
 set "LANG_checking_url=Checking YouTube URL validity..."

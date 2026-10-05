@@ -3,6 +3,8 @@ rem zh-CN locale
 set "LANG_locale_name=简体中文"
 set "LANG_dev_mode=开发模式"
 set "LANG_input_url_prompt=请粘贴 YouTube 网址（按下鼠标右键或是 Ctrl + V）:"
+set "LANG_clipboard_detected=检测到剪贴板网址"
+set "LANG_press_enter_to_use_clipboard=直接按 Enter 套用此网址，或输入其他网址："
 set "LANG_did_not_input_url=未输入网址"
 set "LANG_clean_url=清理后网址"
 set "LANG_checking_url=检查 YouTube 网址是否有效..."

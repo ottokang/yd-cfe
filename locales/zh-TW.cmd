@@ -3,6 +3,8 @@ rem zh-TW locale
 set "LANG_locale_name=繁體中文"
 set "LANG_dev_mode=開發模式"
 set "LANG_input_url_prompt=請貼上 YouTube 網址（按下滑鼠右鍵或是 Ctrl + V):"
+set "LANG_clipboard_detected=偵測到剪貼簿網址"
+set "LANG_press_enter_to_use_clipboard=直接按 Enter 套用此網址，或輸入其他網址："
 set "LANG_did_not_input_url=未輸入網址"
 set "LANG_clean_url=清理後網址"
 set "LANG_checking_url=檢查 YouTube 網址是否有效..."

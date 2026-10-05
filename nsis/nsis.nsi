@@ -6,7 +6,7 @@
 ; Basic definitions
 !define APP_NAME "yd-cfe"
 !define APP_EXE  "yd-cfe.cmd"
-!define APP_VERSION "1.0.12"
+!define APP_VERSION "1.0.13"
 !define APP_PUBLISHER "yd-cfe Developers"
 !define APP_UNINSTKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 !define APP_ICON "yd-cfe_icon.ico"
