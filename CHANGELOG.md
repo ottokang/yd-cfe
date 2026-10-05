@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.13]
+## [1.0.13] -2026.10.05
 
 * Add clipboard link detection
 * Add command window title
