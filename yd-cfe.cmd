@@ -62,7 +62,7 @@ if "%title%"=="" (
 rem Start menu display
 cls
 echo:
-echo     %cyan%^<^< yd-cfe ^>^>%reset_color%    v%_VERSION_%                      %yellow_strong% C %reset_color% Cookies: %green%%cookies_from_browser%%reset_color%
+echo     %cyan%^<^< yd-cfe ^>^>%reset_color%    v%_VERSION_%                      %yellow_strong% C %reset_color% Cookies: %red%%cookies_from_browser%%reset_color%
 
 if "%is_deno_installed%"=="true" (
     echo:
