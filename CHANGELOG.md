@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.14] -unreleased
+
+* Remove Safari from cookies list
+
 ## [1.0.13] -2026.10.05
 
 * Add clipboard link detection
