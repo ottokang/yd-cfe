@@ -6,7 +6,7 @@ chcp 65001 > nul
 setlocal enabledelayedexpansion
 
 rem Set constants
-set "_VERSION_=1.0.13"
+set "_VERSION_=1.0.14"
 set "_BIN_PATH_=.\bin"
 set "_YT_DLP_BIN_=%_BIN_PATH_%\yt-dlp.exe"
 set "_FFMPEG_LOCATION_=--ffmpeg-location %_BIN_PATH_%"
@@ -56,7 +56,9 @@ if "%url%"=="" (
 if "%title%"=="" (
     set "double_quote_title="
 ) else (
-    set double_quote_title="%title%"
+    set "display_title=!title!"
+    if not "!title:~40,1!"=="" set "display_title=!title:~0,37!..."
+    set double_quote_title="!display_title!"
 )
 
 rem Start menu display
