@@ -10,7 +10,7 @@ if /i "%locale%"=="zh-SG" set "locale=zh-CN"
 if /i "%locale%"=="zh-MY" set "locale=zh-CN"
 if /i "%locale:~0,7%"=="zh-Hans" set "locale=zh-CN"
 
-rem If locale file not exist, use en-US as default
+rem If locale file does not exist, use en-US as default
 if not exist ".\locales\%locale%.cmd" (
     set "locale=en-US"
 )

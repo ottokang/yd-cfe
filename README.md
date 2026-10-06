@@ -23,7 +23,7 @@ irm https://deno.land/install.ps1 | iex
 
 ## English
 
-A [yt-dlp](https://github.com/yt-dlp/yt-dlp) Windows command-line front-end tool with build-in [FFmpeg](https://ffmpeg.org/), currently using version:
+A [yt-dlp](https://github.com/yt-dlp/yt-dlp) Windows command-line front-end tool with built-in [FFmpeg](https://ffmpeg.org/), currently using version:
 
 * [yt-dlp 2026.08.19](https://github.com/yt-dlp/yt-dlp/releases/tag/2026.08.19)
 * [FFmpeg 9.0.2 binary from gyan.dev](https://www.gyan.dev/ffmpeg/builds/)

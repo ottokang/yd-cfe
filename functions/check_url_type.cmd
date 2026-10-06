@@ -6,7 +6,7 @@ if "%url%"=="" (
 )
 
 rem Check if URL is a playlist or a single video, and set output file name
-echo %url% | findstr /C:"?list=" > nul
+echo "%url%" | findstr /I /C:"list=" > nul
 if %errorlevel%==0 (
     set "output_file_name=%%(playlist)s\%%(playlist_index)s. %%(title)s.%%(ext)s"
     echo %LANG_url_type%: %green_strong%%LANG_playlist%%reset_color%

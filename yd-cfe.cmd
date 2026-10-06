@@ -5,7 +5,7 @@ cd /D "%~dp0"
 chcp 65001 > nul
 setlocal enabledelayedexpansion
 
-rem Set const
+rem Set constants
 set "_VERSION_=1.0.13"
 set "_BIN_PATH_=.\bin"
 set "_YT_DLP_BIN_=%_BIN_PATH_%\yt-dlp.exe"
@@ -13,7 +13,7 @@ set "_FFMPEG_LOCATION_=--ffmpeg-location %_BIN_PATH_%"
 set "_VIDEO_PARAMS_=--embed-thumbnail --embed-metadata --windows-filenames --force-overwrites --embed-subs --convert-subs srt --sub-langs all,-live_chat"
 set "_AUDIO_PARAMS_=--embed-thumbnail --embed-metadata --windows-filenames --force-overwrites"
 
-rem Load colors, initial variables
+rem Load colors, initialize variables
 call ".\functions\colors.cmd"
 set "url="
 set "title="
@@ -31,7 +31,7 @@ set "is_dev=false"
 rem Set development mode
 rem set "is_dev=true"
 
-rem Check if deno is installed
+rem Check if Deno is installed
 call ".\functions\check_deno.cmd"
 
 rem Detect and set system language
@@ -43,10 +43,10 @@ if %is_dev%==true goto INPUT_URL
 rem Menu
 :MENU
 
-rem Load langeuage file
+rem Load language file
 call ".\locales\%locale%.cmd"
 
-rem Set double quote for url and title
+rem Set double quotes for URL and title
 if "%url%"=="" (
     set "double_quote_url="
 ) else (
@@ -75,7 +75,7 @@ echo:
 echo %LANG_video_title%: %magenta%%double_quote_title%%reset_color%
 echo:
 
-rem Check url type (playlist or single video)
+rem Check URL type (playlist or single video)
 call ".\functions\check_url_type.cmd"
 
 rem Set output folder
@@ -120,7 +120,7 @@ echo:
 choice /n /m "%LANG_do_you_want_to_continue%%red_strong%%LANG_download_as_mp4%%reset_color%%bold%%LANG_will_overwrite%%reset_color%? [%green%Y%reset_color%, %red%N%reset_color%]"
 if %errorlevel%==1 (
     cls
-    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_VIDEO_PARAMS_% -t mp4 %url%
+    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_VIDEO_PARAMS_% -t mp4 "%url%"
     goto DOWNLOAD_COMPLETE
 )
 goto MENU
@@ -136,7 +136,7 @@ echo:
 choice /n /m "%LANG_do_you_want_to_continue%%green_strong%%LANG_download_as_best%%reset_color%%bold%%LANG_will_overwrite%%reset_color%? [%green%Y%reset_color%, %red%N%reset_color%]"
 if !ERRORLEVEL!==1 (
     cls
-    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_VIDEO_PARAMS_% -f "bestvideo+bestaudio/best" --merge-output-format mkv %url%
+    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_VIDEO_PARAMS_% -f "bestvideo+bestaudio/best" --merge-output-format mkv "%url%"
     goto DOWNLOAD_COMPLETE
 )
 goto MENU
@@ -152,7 +152,7 @@ echo:
 choice /n /m "%LANG_do_you_want_to_continue%%yellow_strong%%LANG_download_as_mp3%%reset_color%%bold%%LANG_will_overwrite%%reset_color%? [%green%Y%reset_color%, %red%N%reset_color%]"
 if !ERRORLEVEL!==1 (
     cls
-    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_AUDIO_PARAMS_% -t mp3 %url%
+    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_AUDIO_PARAMS_% -t mp3 "%url%"
     goto DOWNLOAD_COMPLETE
 )
 goto MENU
@@ -168,7 +168,7 @@ echo:
 choice /n /m "%LANG_do_you_want_to_continue%%blue_strong%%LANG_download_as_aac%%reset_color%%bold%%LANG_will_overwrite%%reset_color%? [%green%Y%reset_color%, %red%N%reset_color%]"
 if !ERRORLEVEL!==1 (
     cls
-    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_AUDIO_PARAMS_% -t aac %url%
+    %_YT_DLP_BIN_% --output %output_path_full_name% %_FFMPEG_LOCATION_% %cookies_option% %_AUDIO_PARAMS_% -t aac "%url%"
     goto DOWNLOAD_COMPLETE
 )
 goto MENU
@@ -180,7 +180,7 @@ echo %cyan% %LANG_download_complete% %reset_color%
 pause
 goto MENU
 
-rem Input url
+rem Input URL
 :INPUT_URL
 call ".\functions\input_url.cmd"
 goto MENU

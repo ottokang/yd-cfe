@@ -1,15 +1,16 @@
 # Changelog
 
-## [1.0.14] -unreleased
+## [1.0.14] - Unreleased
 
 * Remove Safari from cookies list
+* Add double quotes for URL
 
-## [1.0.13] -2026.10.05
+## [1.0.13] - 2026.10.05
 
 * Add clipboard link detection
 * Add command window title
 
-## [1.0.12] -2026.10.01
+## [1.0.12] - 2026.10.01
 
 * Change application name to yd-cfe
 * Update ffmpeg to 9.0.2
@@ -19,7 +20,7 @@
 * Fix typo
 * Fix NSIS uninstall path bug
 
-## [1.0.11] -2026.08.20
+## [1.0.11] - 2026.08.20
 
 * Update yt-dlp to 2026.08.19
 
@@ -52,7 +53,7 @@
 ## [1.0.5]
 
 * Update yt-dlp to 2026.02.04
-* Check if Deno installed
+* Check if Deno is installed
 
 ## [1.0.4] - 2026-02-03
 
@@ -62,7 +63,7 @@
 ## [1.0.3] - 2025-12-22
 
 * Use TEMP folder for info.json file
-* info.json use random suffix, avoid delete by other instance
+* info.json use random suffix, avoid deletion by other instances
 
 ## [1.0.2] - 2025-12-11
 
@@ -74,7 +75,7 @@
 
 * Add version info after title
 * Show cookies with color
-* Installer support Traditional Chinese, Simplified Chinese
+* Installer supports Traditional Chinese, Simplified Chinese
 * Update language file
 
 ## [1.0.0] - 2025-12-01

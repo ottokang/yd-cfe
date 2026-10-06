@@ -1,4 +1,4 @@
-rem Check if deno is installed
+rem Check if Deno is installed
 
 where deno > nul 2>&1
 if %ERRORLEVEL%==0 (
