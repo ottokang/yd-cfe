@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.15] -2026.11.12
+
+* Update yt-dlp to 2026.10.26
+
 ## [1.0.14] -2026.10.06
 
 * Remove Safari from cookie list
