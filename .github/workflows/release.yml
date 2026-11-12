@@ -1,0 +1,105 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release Tag (e.g. 1.0.15). Leave blank to read from yd-cfe.cmd'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build Installer and Publish Release
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine Release Tag
+        id: tag_info
+        shell: pwsh
+        run: |
+          $inputTag = "${{ inputs.tag_name }}".Trim()
+          if ($inputTag) {
+              $tag = $inputTag
+          } elseif ($env:GITHUB_REF_TYPE -eq 'tag') {
+              $tag = $env:GITHUB_REF_NAME
+          } else {
+              $content = Get-Content yd-cfe.cmd -Raw
+              if ($content -match 'set "_VERSION_=([^"]+)"') {
+                  $tag = $matches[1]
+              } else {
+                  throw "Could not determine version tag from yd-cfe.cmd"
+              }
+          }
+          Write-Host "Release tag: $tag"
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+
+      - name: Extract Release Notes from CHANGELOG
+        id: changelog
+        shell: pwsh
+        run: |
+          $tag = "${{ steps.tag_info.outputs.tag }}"
+          if (Test-Path CHANGELOG.md) {
+              $content = Get-Content CHANGELOG.md -Raw
+              if ($content -match "(?ms)##\s*\[$tag\].*?\r?\n(.*?)(?=\r?\n##\s*\[|\z)") {
+                  $notes = $matches[1].Trim()
+                  $bullets = ($notes -split "`r?`n" | Where-Object { $_.Trim().StartsWith("*") }) -join "`n"
+                  if ($bullets) {
+                      Set-Content -Path release_notes.md -Value $bullets -Encoding utf8
+                      Write-Host "Found release notes for $tag:`n$bullets"
+                      "has_notes=true" >> $env:GITHUB_OUTPUT
+                      exit 0
+                  }
+              }
+          }
+          Write-Host "No matching notes found in CHANGELOG.md; will use automatic release notes."
+          "has_notes=false" >> $env:GITHUB_OUTPUT
+
+      - name: Setup NSIS
+        shell: pwsh
+        run: |
+          if (-not (Get-Command makensis -ErrorAction SilentlyContinue)) {
+              if (Test-Path "C:\Program Files (x86)\NSIS\makensis.exe") {
+                  Write-Host "Adding pre-installed NSIS to PATH..."
+                  "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Append
+              } else {
+                  Write-Host "Installing NSIS via Chocolatey..."
+                  choco install nsis -y
+                  "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Append
+              }
+          }
+
+      - name: Build NSIS Installer
+        shell: pwsh
+        run: |
+          if (-not (Test-Path release)) {
+              New-Item -ItemType Directory release | Out-Null
+          }
+          Push-Location nsis
+          makensis nsis.nsi
+          Pop-Location
+          Get-ChildItem release\*.exe | Select-Object Name, Length
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag_info.outputs.tag }}
+          name: ${{ steps.tag_info.outputs.tag }}
+          body_path: ${{ steps.changelog.outputs.has_notes == 'true' && 'release_notes.md' || '' }}
+          generate_release_notes: ${{ steps.changelog.outputs.has_notes != 'true' }}
+          files: release/*.exe
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
