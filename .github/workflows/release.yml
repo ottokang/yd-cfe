@@ -57,7 +57,8 @@ jobs:
                   $bullets = ($notes -split "`r?`n" | Where-Object { $_.Trim().StartsWith("*") }) -join "`n"
                   if ($bullets) {
                       Set-Content -Path release_notes.md -Value $bullets -Encoding utf8
-                      Write-Host "Found release notes for $tag:`n$bullets"
+                      Write-Host "Found release notes for ${tag}:"
+                      Write-Host $bullets
                       "has_notes=true" >> $env:GITHUB_OUTPUT
                       exit 0
                   }
