@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.16] -2026.11.24
+
+* Update yt-dlp to 2026.11.23
+* Update FFmpeg to 9.1
+
 ## [1.0.15] -2026.11.12
 
 * Update yt-dlp to 2026.10.26

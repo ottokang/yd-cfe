@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Release Tag (e.g. 1.0.15). Leave blank to read from yd-cfe.cmd'
+        description: 'Release Tag (e.g. 1.0.16). Leave blank to read from yd-cfe.cmd'
         required: false
         default: ''
 
